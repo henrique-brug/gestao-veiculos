@@ -1,0 +1,44 @@
+<app-title title="Cadastrar veículo:"> </app-title>
+
+<div
+  id="div-deposit-message"
+  class="card-panel white-text message"
+  [hidden]="!this.veiculoMensagem"
+  [class.red]="!this.veiculoValido"
+>
+  {{ this.veiculoMensagem }}
+</div>
+
+<form class="container" (submit)="onSubmit()">
+  <div class="input-field col s6">
+    <input
+      id="modelo"
+      name="modelo"
+      type="text"
+      class="validate"
+      [(ngModel)]="this.veiculo.modelo"
+    />
+    <label for="modelo">Modelo</label>
+  </div>
+  <p>Modelo: {{ this.veiculo.modelo }}</p>
+
+  <div class="input-field col s6">
+    <input
+      id="placa"
+      name="placa"
+      type="text"
+      class="validate"
+      [(ngModel)]="this.veiculo.placa"
+      mask="AAA-0A00"
+      [dropSpecialCharacters]="true"
+      [showMaskTyped]="false"
+    />
+    <label for="placa">Placa</label>
+  </div>
+  <p>Placa: {{ this.veiculo.placa }}</p>
+
+  <button class="btn waves-effect waves-light" type="submit" name="action">
+    Cadastrar
+    <i class="material-icons right">save</i>
+  </button>
+</form>
