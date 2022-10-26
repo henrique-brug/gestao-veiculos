@@ -9,6 +9,7 @@ import { FooterComponent } from './footer/footer.component';
 import { FormCadastroVeiculoComponent } from './form-cadastro-veiculo/form-cadastro-veiculo.component';
 import { FormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
+import { LandPageComponent } from './land-page/land-page.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { NgxMaskModule } from 'ngx-mask';
     HeaderComponent,
     TitleComponent,
     FooterComponent,
-    FormCadastroVeiculoComponent
+    FormCadastroVeiculoComponent,
+    LandPageComponent
   ],
   imports: [
     BrowserModule,
