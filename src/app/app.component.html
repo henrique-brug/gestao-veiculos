@@ -6,10 +6,8 @@
   <router-outlet></router-outlet>
 </main>
 
-<footer>
-  <app-footer>
-    <span style="font-weight: bold; margin-right: 20px">{{
-      this?.currentDate | date: "HH:mm:ss"
-    }}</span>
-  </app-footer>
-</footer>
+<app-footer>
+  <span style="font-weight: bold; margin-right: 20px">{{
+    this?.currentDate | date: "HH:mm:ss"
+  }}</span>
+</app-footer>

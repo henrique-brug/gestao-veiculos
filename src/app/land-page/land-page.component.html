@@ -1,1 +1,45 @@
+<div class="adicionar-saldo">
+  <div style="display: flex">
+    <button
+      class="btn waves-effect waves-light"
+      style="text-transform: capitalize"
+      type="button"
+      name="action"
+      (click)="expandirSoma()"
+    >
+      Adicionar saldo
+      <i class="material-icons right">keyboard_arrow_right</i>
+    </button>
+  </div>
+
+  <div [hidden]="!this.mostrarSoma">
+    <div class="input-saldo">
+      <div class="input-field col s6">
+        <input
+          id="adicionar-saldo"
+          name="adicionar-saldo"
+          type="text"
+          class="validate money adicionar-saldo label"
+          [(ngModel)]="this.valor"
+          mask="separator.2"
+          [thousandSeparator]="'.'"
+          [decimalMarker]="','"
+          prefix="R$ "
+          [dropSpecialCharacters]="true"
+          [showMaskTyped]="false"
+        />
+        <label for="adicionar-saldo"></label>
+      </div>
+      <button
+        class="btn waves-effect waves-light button-soma"
+        type="button"
+        name="action"
+        (click)="realizarSoma()"
+      >
+        <i class="material-icons left">add</i>
+      </button>
+    </div>
+  </div>
+</div>
+
 <app-title title="Veículos:"> </app-title>
