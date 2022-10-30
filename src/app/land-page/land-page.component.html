@@ -7,11 +7,18 @@
   {{ this.saldoMessage }}
 </div>
 
+<div style="width: 100%">
+  <app-saldo
+    #adicionarsaldo
+    [saldoConta]="this.conta.saldo"
+    (messageSaldoEvent)="this.messageSaldoEvent($event)"
+  ></app-saldo>
+</div>
+
 <div class="adicionar-saldo">
   <div style="display: flex">
     <button
-      class="btn waves-effect waves-light"
-      style="text-transform: capitalize; position: absolute; margin-top: 130px"
+      class="btn waves-effect waves-light button-adicionar-saldo"
       type="button"
       name="action"
       (click)="expandirSoma()"
@@ -49,19 +56,11 @@
       </button>
     </div>
   </div>
-
-  <div style="width: 100%">
-    <app-saldo
-      #adicionarsaldo
-      [saldoConta]="this.conta.saldo"
-      (messageSaldoEvent)="this.messageSaldoEvent($event)"
-    ></app-saldo>
-  </div>
 </div>
 
 <app-title title="Veículos:"> </app-title>
 <div class="row">
-  <div class="col s12 m6 offset-m2">
+  <div class="col s12 m6 offset-m1">
     <table>
       <thead>
         <tr>

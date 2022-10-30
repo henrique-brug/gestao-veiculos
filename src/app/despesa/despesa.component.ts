@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Veiculo } from '../model/veiculo';
 import { Conta } from '../model/conta';
+import { Despesa } from '../model/despesa';
 
 @Component({
   selector: 'app-despesa',
@@ -12,6 +13,7 @@ import { Conta } from '../model/conta';
 export class DespesaComponent implements OnInit {
   veiculo!: Veiculo;
   conta: Conta = LandPageComponent.conta;
+  despesa: Despesa = new Despesa(0, '', '');
 
   constructor(private route: ActivatedRoute) {}
 
@@ -22,4 +24,6 @@ export class DespesaComponent implements OnInit {
     });
     this.veiculo = veiculos[0];
   }
+
+  onSubmit(): void {}
 }

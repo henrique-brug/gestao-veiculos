@@ -1,7 +1,7 @@
 .modal-saldo {
   width: 200px !important;
   height: 50px !important;
-  margin-left: 76% !important;
+  margin-left: 1% !important;
   position: static !important;
   background: #2A8787;
   box-shadow: 5px 5px 5px #0000004d;
@@ -17,7 +17,7 @@
 }
 
 .label-saldo {
-  margin-left: 76% !important;
+  margin-left: 1% !important;
   position: static !important;
   font-weight: bold;
   font-family: cursive;

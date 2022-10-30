@@ -1,5 +1,6 @@
 .adicionar-saldo {
   display: flex;
+  height: 30px;
   margin: 20px;
   text-transform: capitalize;
 }
@@ -14,13 +15,35 @@
   display: flex;
   width: 200px;
   margin-left: 80%;
+  margin-bottom: 10px;
 }
 
 .button-soma {
   display: flex;
-  margin-top: 19px;
   width: 30px;
   height: 19px;
   padding-left: 6px;
   line-height: initial;
+  margin-top: 14px;
+}
+
+.button-adicionar-saldo {
+  text-transform: capitalize;
+  position: absolute;
+  margin-bottom: 10px;
+}
+
+@media(max-width: 500px) {
+  .button-adicionar-saldo {
+    margin-top: 0px;
+  }
+
+  .input-saldo {
+    margin-top: 0px;
+    margin-left: 50%;
+  }
+
+  .adicionar-saldo {
+    display: block;
+  }
 }

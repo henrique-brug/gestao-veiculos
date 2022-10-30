@@ -1,0 +1,11 @@
+.title {
+  font-weight: bold;
+  font-family: cursive;
+  padding-top: 14px;
+}
+
+.container {
+  width: 500px;
+  height: auto;
+  margin: 20px 20px;
+}
