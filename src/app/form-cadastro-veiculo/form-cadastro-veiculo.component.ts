@@ -1,5 +1,6 @@
 import { Veiculo } from './../model/veiculo';
 import { Component, OnInit } from '@angular/core';
+import { LandPageComponent } from '../land-page/land-page.component';
 
 @Component({
   selector: 'app-form-cadastro-veiculo',
@@ -26,6 +27,7 @@ export class FormCadastroVeiculoComponent implements OnInit {
       this.veiculoMensagem =
         'Placa inválida, por favor informe no seguinte formato: "ABC-1D23"';
     } else {
+      LandPageComponent.veiculos.push(this.veiculo);
       this.veiculoMensagem = '';
       this.veiculoValido = true;
       this.veiculo = new Veiculo('', '');

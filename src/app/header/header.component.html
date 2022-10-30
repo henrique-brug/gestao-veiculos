@@ -2,20 +2,22 @@
   <nav>
     <div class="nav-wrapper header">
       <div class="container header">
-        <a class="brand-logo" href="#">
+        <a class="brand-logo" routerLink="">
           <img
             class="my-logo"
             src="/assets/resources/images/logo_gestao_veiculos.svg"
           />
         </a>
 
-        <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+        <a routerLink="" data-target="mobile-demo" class="sidenav-trigger">
           <i class="material-icons">menu</i>
         </a>
         <ul class="left hide-on-med-and-down">
           <li><h1 class="app-name">Gestão Veículos</h1></li>
           <li>
-            <a routerLink="#" class="flow-text itens">Cadastrar veículo</a>
+            <a routerLink="cadastro-veiculo" class="flow-text itens"
+              >Cadastrar veículo</a
+            >
           </li>
         </ul>
       </div>
@@ -33,7 +35,7 @@
           <p class="app-name mobile">Gestão Veículos</p>
           <li>
             <div>
-              <a routerLink="#" class="flow-text itens mobile"
+              <a routerLink="cadastro-veiculo" class="flow-text itens mobile"
                 >Cadastrar veículo</a
               >
             </div>

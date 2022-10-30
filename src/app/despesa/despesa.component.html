@@ -1,0 +1,62 @@
+<app-title title="Adicionar despesas"> </app-title>
+<div style="width: 100%">
+  <app-saldo #adicionarsaldo [saldoConta]="this.conta.saldo"></app-saldo>
+</div>
+
+<div class="container contact">
+  <h6 class="title">Veículo selecionado:</h6>
+  <div class="row">
+    <ul class="collection col s12 offset-m2 m6">
+      <li class="collection-item">
+        <span class="badge left">Código:</span>{{ this.veiculo.idVeiculo }}
+      </li>
+      <li class="collection-item">
+        <span class="badge left">Modelo:</span>{{ this.veiculo.modelo }}
+      </li>
+      <li class="collection-item">
+        <span class="badge left">Placa</span>{{ this.veiculo.placa }}
+      </li>
+    </ul>
+  </div>
+</div>
+
+<form class="container" (submit)="onSubmit()">
+  <div class="input-field col s6">
+    <input
+      id="valor"
+      name="valor"
+      type="text"
+      class="validate"
+      [(ngModel)]="this.despesa.valor"
+      mask="separator.2"
+      [thousandSeparator]="'.'"
+      [decimalMarker]="','"
+      prefix="R$ "
+      [dropSpecialCharacters]="true"
+      [showMaskTyped]="false"
+    />
+    <label for="valor">Valor gasto</label>
+  </div>
+
+  <div class="input-field col s12">
+    <textarea
+      id="nomeDespesa"
+      name="nomeDespesa"
+      class="materialize-textarea"
+      data-length="50"
+      [(ngModel)]="this.despesa.nomeDespesa"
+    ></textarea>
+    <label for="nomeDespesa">Identifique esta despesa com um nome</label>
+  </div>
+
+  <div class="input-field col s12">
+    <textarea
+      id="descricao"
+      name="descricao"
+      type="text"
+      data-length="150"
+      [(ngModel)]="this.despesa.descricao"
+    ></textarea>
+    <label for="descricao">Descreva aqui os detalhes do valor gasto</label>
+  </div>
+</form>

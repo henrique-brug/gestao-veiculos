@@ -1,0 +1,49 @@
+.adicionar-saldo {
+  display: flex;
+  height: 30px;
+  margin: 20px;
+  text-transform: capitalize;
+}
+
+.adicionar-saldo .label {
+  margin: 0px 10px 0px 30px !important;
+  height: 24px !important;
+  width: 100px !important;
+}
+
+.input-saldo {
+  display: flex;
+  width: 200px;
+  margin-left: 80%;
+  margin-bottom: 10px;
+}
+
+.button-soma {
+  display: flex;
+  width: 30px;
+  height: 19px;
+  padding-left: 6px;
+  line-height: initial;
+  margin-top: 14px;
+}
+
+.button-adicionar-saldo {
+  text-transform: capitalize;
+  position: absolute;
+  margin-bottom: 10px;
+}
+
+@media(max-width: 500px) {
+  .button-adicionar-saldo {
+    margin-top: 0px;
+  }
+
+  .input-saldo {
+    margin-top: 0px;
+    margin-left: 50%;
+  }
+
+  .adicionar-saldo {
+    display: block;
+  }
+}
