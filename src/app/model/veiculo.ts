@@ -1,8 +1,13 @@
 export class Veiculo {
-  id?: number;
+  idVeiculo?: number;
 
-  constructor(public modelo: string, public placa: string) {
+  constructor(
+    public modelo: string,
+    public placa: string,
+    idVeiculo: number = 0
+  ) {
     this.modelo = modelo;
     this.placa = placa;
+    this.idVeiculo = idVeiculo;
   }
 }

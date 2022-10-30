@@ -29,10 +29,10 @@
 
 @media(max-width: 500px) {
   .label-saldo {
-    margin-left: 0% !important;
+    margin-left: 5% !important;
   }
 
-  .label-saldo {
-    margin-left: 0% !important;
+  .modal-saldo {
+    margin-left: 5% !important;
   }
 }

@@ -21,7 +21,7 @@ https://www.figma.com/file/5UlIoB5BHFfsqvgzQfZnvq/Bootstrap-UI-Kit-(Gest%C3%A3o-
 - [x] Construir páginas web com o conceito de componentes.
 - [x] Criar o layout da aplicação com componentes, ou seja, o cabeçalho e rodapé precisam ser componentes.
 - [x] Usar pelo menos dois tipos de data-binding (Interpolation, Property Binding, Event Binding e Two Way Data Binding).
-- [] Passar dados via hierarquia de componentes, ou seja, usando @Input ou @Output.
+- [x] Passar dados via hierarquia de componentes, ou seja, usando @Input ou @Output.
 - [x] Mapear componentes à rotas no módulo de rotas.
 - [x] Criar navegação entre páginas por meio de rotas.
 - [] Passar dados entre componentes que representam diferentes telas via parâmetros de rotas.

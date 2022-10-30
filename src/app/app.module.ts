@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
 import { LandPageComponent } from './land-page/land-page.component';
 import { SaldoComponent } from './saldo/saldo.component';
+import { DespesaComponent } from './despesa/despesa.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SaldoComponent } from './saldo/saldo.component';
     FooterComponent,
     FormCadastroVeiculoComponent,
     LandPageComponent,
-    SaldoComponent
+    SaldoComponent,
+    DespesaComponent
   ],
   imports: [
     BrowserModule,
