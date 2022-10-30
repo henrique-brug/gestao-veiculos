@@ -1,8 +1,17 @@
+<div
+  id="div-message"
+  class="card-panel white-text message"
+  [hidden]="!this.saldoMessage"
+  [ngStyle]="currentStyles"
+>
+  {{ this.saldoMessage }}
+</div>
+
 <div class="adicionar-saldo">
   <div style="display: flex">
     <button
       class="btn waves-effect waves-light"
-      style="text-transform: capitalize"
+      style="text-transform: capitalize; position: absolute; margin-top: 130px"
       type="button"
       name="action"
       (click)="expandirSoma()"
@@ -20,7 +29,7 @@
           name="adicionar-saldo"
           type="text"
           class="validate money adicionar-saldo label"
-          [(ngModel)]="this.valor"
+          [(ngModel)]="this.valorSoma"
           mask="separator.2"
           [thousandSeparator]="'.'"
           [decimalMarker]="','"
@@ -39,6 +48,14 @@
         <i class="material-icons left">add</i>
       </button>
     </div>
+  </div>
+
+  <div style="width: 100%">
+    <app-saldo
+      #adicionarsaldo
+      [saldoConta]="this.conta.saldo"
+      (messageSaldoEvent)="this.messageSaldoEvent($event)"
+    ></app-saldo>
   </div>
 </div>
 

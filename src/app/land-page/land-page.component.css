@@ -12,7 +12,8 @@
 
 .input-saldo {
   display: flex;
-  width: 200px
+  width: 200px;
+  margin-left: 80%;
 }
 
 .button-soma {

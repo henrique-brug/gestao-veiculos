@@ -10,6 +10,7 @@ import { FormCadastroVeiculoComponent } from './form-cadastro-veiculo/form-cadas
 import { FormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
 import { LandPageComponent } from './land-page/land-page.component';
+import { SaldoComponent } from './saldo/saldo.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LandPageComponent } from './land-page/land-page.component';
     TitleComponent,
     FooterComponent,
     FormCadastroVeiculoComponent,
-    LandPageComponent
+    LandPageComponent,
+    SaldoComponent
   ],
   imports: [
     BrowserModule,
