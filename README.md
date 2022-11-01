@@ -30,6 +30,6 @@ https://www.figma.com/file/5UlIoB5BHFfsqvgzQfZnvq/Bootstrap-UI-Kit-(Gest%C3%A3o-
 - [] Fazer requisições a API com tratamento da resposta com Promises ou Observables.
 - [] Cadastrar uma entidade usando uma API (JSON Server ou Firebase).
 - [x] Apresentar uma lista de dados com a diretiva estrutural ngFor.
-- [] Usar a diretiva ngIf
-- [] Formatar a apresentação de dados com Pipes.
+- [x] Usar a diretiva ngIf
+- [x] Formatar a apresentação de dados com Pipes.
 - [] Build e deploy da aplicação.
