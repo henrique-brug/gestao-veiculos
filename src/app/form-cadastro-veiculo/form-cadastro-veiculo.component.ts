@@ -1,6 +1,7 @@
 import { Veiculo } from './../model/veiculo';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { LandPageComponent } from '../land-page/land-page.component';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-form-cadastro-veiculo',
