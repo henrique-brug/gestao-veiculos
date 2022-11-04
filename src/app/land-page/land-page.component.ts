@@ -1,36 +1,32 @@
 import { Veiculo } from './../model/veiculo';
 import { Component, OnInit } from '@angular/core';
 import { Conta } from '../model/conta';
-import { FormCadastroVeiculoComponent } from '../form-cadastro-veiculo/form-cadastro-veiculo.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { VeiculoStorageService } from '../form-cadastro-veiculo/veiculo-storage.service';
 
 @Component({
   selector: 'app-land-page',
   templateUrl: './land-page.component.html',
   styleUrls: ['./land-page.component.css'],
+  providers: [VeiculoStorageService],
 })
 export class LandPageComponent implements OnInit {
-  public static veiculos: Array<Veiculo> = [];
   public static conta = new Conta();
   conta: Conta = new Conta();
-  veiculos: Array<Veiculo> = [];
+  veiculos?: Veiculo[];
   saldoMessage: String = '';
   valorSoma: number = 0;
   mostrarSoma = false;
   color = '#2286d2';
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private veiculoService: VeiculoStorageService
+  ) {}
 
   ngOnInit(): void {
-    if (LandPageComponent.veiculos.length == 0) {
-      LandPageComponent.veiculos.push(new Veiculo('Honda', 'ADS-2S14', 1));
-      LandPageComponent.veiculos.push(new Veiculo('Gol', 'MJF-8D45', 2));
-      LandPageComponent.veiculos.push(new Veiculo('Man', 'CXS-4S57', 3));
-      LandPageComponent.veiculos.push(new Veiculo('Palio', 'ADS-2S14', 4));
-      LandPageComponent.veiculos.push(new Veiculo('Fan/125', 'MJF-8D45', 5));
-      LandPageComponent.veiculos.push(new Veiculo('Mustang', 'CXS-4S57', 6));
-    }
-    this.veiculos = LandPageComponent.veiculos;
+    this.veiculos = this.veiculoService.getUsers();
     this.conta = LandPageComponent.conta;
   }
 
@@ -45,7 +41,16 @@ export class LandPageComponent implements OnInit {
   }
 
   messageSaldoEvent(event: String) {
-    this.saldoMessage = event;
+    this.mostrarMessage(event);
+  }
+
+  mostrarMessage(message: String, sucess: Boolean = true): void {
+    this.saldoMessage = message;
+    if (sucess) {
+      this.color = '#2286d2';
+    } else {
+      this.color = '#ff3f3f';
+    }
     setTimeout(() => {
       this.saldoMessage = '';
     }, 3000);
@@ -55,8 +60,24 @@ export class LandPageComponent implements OnInit {
     background: this.color,
   };
 
-  onClickItem(v: Veiculo) {
+  adicionarDespesa(v: Veiculo) {
     this.router.navigate(['/adicionar-despesa', v?.idVeiculo]);
+  }
+
+  onDelete(placa: string) {
+    let confirmation = window.confirm(
+      'Você tem certeza que deseja excluir o veículo com a placa: ' + placa
+    );
+    if (!confirmation) {
+      return;
+    }
+    let sucess: boolean = this.veiculoService.delete(placa);
+    if (sucess) {
+      this.mostrarMessage('O veículo foi removido com sucesso!');
+    } else {
+      this.mostrarMessage('Opps! Não foi possível remover o veículo!', false);
+    }
+    this.veiculos = this.veiculoService.getUsers();
   }
 
   ngOnDestroy(): void {

@@ -71,10 +71,36 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let v of this.veiculos" (click)="onClickItem(v)">
+        <tr *ngFor="let v of this.veiculos">
           <td>{{ v.idVeiculo }}</td>
           <td>{{ v.modelo }}</td>
           <td>{{ v.placa | uppercase }}</td>
+          <td class="right">
+            <a>
+              <img
+                title="Adicionar despesa"
+                class="img-despesa icon"
+                src="./assets/resources/images/despesa-icon.png"
+                (click)="adicionarDespesa(v)"
+              />
+            </a>
+            <a
+              ><i
+                title="Editar"
+                class="material-icons orange-text icon"
+                (click)="adicionarDespesa(v)"
+                >edit</i
+              ></a
+            >
+            <a
+              ><i
+                title="Excluir"
+                class="material-icons my-icon-size red-text icon"
+                (click)="onDelete(v.placa)"
+                >delete</i
+              ></a
+            >
+          </td>
         </tr>
       </tbody>
     </table>

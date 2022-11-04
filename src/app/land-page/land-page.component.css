@@ -33,6 +33,20 @@
   margin-bottom: 10px;
 }
 
+.img-despesa {
+  width: 35px;
+  height: 35px;
+}
+
+a {
+  margin: 10px;
+}
+
+.icon {
+  font-size: 30px;
+  cursor: pointer;
+}
+
 @media(max-width: 500px) {
   .button-adicionar-saldo {
     margin-top: 0px;
