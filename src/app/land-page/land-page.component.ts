@@ -26,7 +26,7 @@ export class LandPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.veiculos = this.veiculoService.getUsers();
+    this.veiculos = this.veiculoService.getVeiculos();
     this.conta = LandPageComponent.conta;
   }
 
@@ -64,20 +64,24 @@ export class LandPageComponent implements OnInit {
     this.router.navigate(['/adicionar-despesa', v?.idVeiculo]);
   }
 
-  onDelete(placa: string) {
+  editarVeiculo(v: Veiculo) {
+    this.router.navigate(['/editar-veiculo', v?.idVeiculo]);
+  }
+
+  onDelete(idVeiculo: number) {
     let confirmation = window.confirm(
-      'Você tem certeza que deseja excluir o veículo com a placa: ' + placa
+      'Você tem certeza que deseja excluir o veículo com o código: ' + idVeiculo
     );
     if (!confirmation) {
       return;
     }
-    let sucess: boolean = this.veiculoService.delete(placa);
+    let sucess: boolean = this.veiculoService.delete(idVeiculo);
     if (sucess) {
       this.mostrarMessage('O veículo foi removido com sucesso!');
     } else {
       this.mostrarMessage('Opps! Não foi possível remover o veículo!', false);
     }
-    this.veiculos = this.veiculoService.getUsers();
+    this.veiculos = this.veiculoService.getVeiculos();
   }
 
   ngOnDestroy(): void {

@@ -25,39 +25,39 @@ export class VeiculoStorageService {
 
   update(veiculo: Veiculo) {
     this.veiculos = WebStorageUtil.get(Constants.VEICULOS_KEY);
-    this.delete(veiculo.placa);
+    this.delete(veiculo.idVeiculo);
     this.save(veiculo);
   }
 
-  delete(placa: string): boolean {
+  delete(idVeiculo: number): boolean {
     this.veiculos = WebStorageUtil.get(Constants.VEICULOS_KEY);
     this.veiculos = this.veiculos.filter((v) => {
-      return v.placa?.valueOf() != placa?.valueOf();
+      return v.idVeiculo != idVeiculo;
     });
 
     WebStorageUtil.set(Constants.VEICULOS_KEY, this.veiculos);
     return true;
   }
 
-  isExist(value: string): boolean {
+  isExist(placa: string): boolean {
     this.veiculos = WebStorageUtil.get(Constants.VEICULOS_KEY);
     for (let v of this.veiculos) {
-      if (v.placa?.valueOf() == value?.valueOf()) {
+      if (v.placa?.valueOf() == placa?.valueOf()) {
         return true;
       }
     }
     return false;
   }
 
-  getUsers(): Veiculo[] {
+  getVeiculos(): Veiculo[] {
     this.veiculos = WebStorageUtil.get(Constants.VEICULOS_KEY);
     return this.veiculos;
   }
-/*
-  notifyTotalUsers() {
-    this.veiculoSource.next(this.getUsers()?.length);
-  }
 
+  getTotalVeiculos(): number {
+    return this.getVeiculos()?.length;
+  }
+  /*
   asObservable(): Observable<number> {
     return this.veiculoSource;
   }*/

@@ -1,3 +1,12 @@
+<div
+  id="div-message"
+  class="card-panel white-text message"
+  [hidden]="!this.message"
+  [ngStyle]="currentStyles"
+>
+  {{ this.message }}
+</div>
+
 <app-title title="Cadastrar veículo:"> </app-title>
 
 <form class="container" #form="ngForm" (submit)="onSubmit()">
