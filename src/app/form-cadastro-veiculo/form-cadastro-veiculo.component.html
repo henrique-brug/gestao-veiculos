@@ -21,7 +21,7 @@
       #modelo="ngModel"
       required
     />
-    <label for="modelo">Modelo *</label>
+    <label for="modelo" [ngClass]="{'active': true}">Modelo *</label>
     <div class="red-text" [hidden]="modelo.valid || modelo.untouched">
       Por favor, informe o modelo.
     </div>
@@ -45,7 +45,7 @@
       #placa="ngModel"
       required
     />
-    <label for="placa">Placa *</label>
+    <label for="placa" [ngClass]="{'active': true}">Placa *</label>
     <div class="red-text" [hidden]="placa.valid || placa.untouched">
       Por favor, informe a placa.
     </div>
