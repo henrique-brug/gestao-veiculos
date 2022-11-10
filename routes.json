@@ -1,0 +1,5 @@
+{
+  "/veiculo/placa/:p": "/veiculo?placa=:p",
+  "/veiculo": "/veiculo",
+  "/veiculo/:idVeiculo": "veiculo?=:idVeiculo"
+}

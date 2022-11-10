@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Veiculo } from '../model/veiculo';
+import { VeiculoPromiseService } from '../services/veiculo-promise.service';
 import { Constants } from '../util/constantes';
 import { WebStorageUtil } from '../util/web-storage-util';
 
@@ -9,7 +10,7 @@ export class VeiculoStorageService {
   veiculos!: Veiculo[];
   private veiculoSource!: BehaviorSubject<number>;
 
-  constructor() {
+  constructor(private veiculoPromiseService: VeiculoPromiseService) {
     if (localStorage.getItem(Constants.VEICULOS_KEY) == null) {
       localStorage.setItem(Constants.VEICULOS_KEY, JSON.stringify([]));
     }

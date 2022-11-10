@@ -8,6 +8,7 @@ import { TitleComponent } from './title/title.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormCadastroVeiculoComponent } from './form-cadastro-veiculo/form-cadastro-veiculo.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { NgxMaskModule } from 'ngx-mask';
 import { LandPageComponent } from './land-page/land-page.component';
 import { SaldoComponent } from './saldo/saldo.component';
@@ -27,6 +28,7 @@ import { DespesaComponent } from './despesa/despesa.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     FormsModule,
     NgxMaskModule.forRoot(),
   ],
