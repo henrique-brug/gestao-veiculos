@@ -23,9 +23,9 @@ export class DespesaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    let idParam: number = +this.route.snapshot.paramMap.get('idVeiculo')!;
+    let idParam: number = +this.route.snapshot.paramMap.get('id')!;
     let veiculos = this.veiculoService.getVeiculos().filter((v) => {
-      return v.idVeiculo === idParam;
+      return v.id === idParam;
     });
     this.veiculo = veiculos[0];
   }

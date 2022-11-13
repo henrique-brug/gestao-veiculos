@@ -61,21 +61,21 @@ export class LandPageComponent implements OnInit {
   };
 
   adicionarDespesa(v: Veiculo) {
-    this.router.navigate(['/adicionar-despesa', v?.idVeiculo]);
+    this.router.navigate(['/adicionar-despesa', v?.id]);
   }
 
   editarVeiculo(v: Veiculo) {
-    this.router.navigate(['/editar-veiculo', v?.idVeiculo]);
+    this.router.navigate(['/editar-veiculo', v?.id]);
   }
 
-  onDelete(idVeiculo: number) {
+  onDelete(id: number) {
     let confirmation = window.confirm(
-      'Você tem certeza que deseja excluir o veículo com o código: ' + idVeiculo
+      'Você tem certeza que deseja excluir o veículo com o código: ' + id
     );
     if (!confirmation) {
       return;
     }
-    let sucess: boolean = this.veiculoService.delete(idVeiculo);
+    let sucess: boolean = this.veiculoService.delete(id);
     if (sucess) {
       this.mostrarMessage('O veículo foi removido com sucesso!');
     } else {

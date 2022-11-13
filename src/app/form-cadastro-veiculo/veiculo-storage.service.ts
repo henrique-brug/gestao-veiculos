@@ -10,7 +10,7 @@ export class VeiculoStorageService {
   veiculos!: Veiculo[];
   private veiculoSource!: BehaviorSubject<number>;
 
-  constructor(private veiculoPromiseService: VeiculoPromiseService) {
+  constructor() {
     if (localStorage.getItem(Constants.VEICULOS_KEY) == null) {
       localStorage.setItem(Constants.VEICULOS_KEY, JSON.stringify([]));
     }
@@ -26,14 +26,14 @@ export class VeiculoStorageService {
 
   update(veiculo: Veiculo) {
     this.veiculos = WebStorageUtil.get(Constants.VEICULOS_KEY);
-    this.delete(veiculo.idVeiculo);
+    this.delete(veiculo.id);
     this.save(veiculo);
   }
 
-  delete(idVeiculo: number): boolean {
+  delete(id: number): boolean {
     this.veiculos = WebStorageUtil.get(Constants.VEICULOS_KEY);
     this.veiculos = this.veiculos.filter((v) => {
-      return v.idVeiculo != idVeiculo;
+      return v.id != id;
     });
 
     WebStorageUtil.set(Constants.VEICULOS_KEY, this.veiculos);
@@ -53,6 +53,10 @@ export class VeiculoStorageService {
   getVeiculos(): Veiculo[] {
     this.veiculos = WebStorageUtil.get(Constants.VEICULOS_KEY);
     return this.veiculos;
+  }
+
+  setVeiculos(veiculos: Veiculo[]) {
+    localStorage.setItem(Constants.VEICULOS_KEY, JSON.stringify(veiculos));
   }
 
   getTotalVeiculos(): number {

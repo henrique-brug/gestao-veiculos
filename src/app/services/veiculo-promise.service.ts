@@ -21,6 +21,10 @@ export class VeiculoPromiseService {
       .toPromise();
   }
 
+  getAll(): Promise<Veiculo[]> {
+    return this.httpClient.get<Veiculo[]>(`${this.URL}/veiculo`).toPromise();
+  }
+
   save(veiculo: Veiculo): Promise<Veiculo> {
     return this.httpClient
       .post<Veiculo>(this.URL, JSON.stringify(veiculo), this.httpOptions)
@@ -30,7 +34,7 @@ export class VeiculoPromiseService {
   patch(veiculo: Veiculo): Promise<Veiculo> {
     return this.httpClient
       .patch<Veiculo>(
-        `${this.URL}/${veiculo.idVeiculo}`,
+        `${this.URL}/${veiculo.id}`,
         JSON.stringify(veiculo),
         this.httpOptions
       )
@@ -40,7 +44,7 @@ export class VeiculoPromiseService {
   update(veiculo: Veiculo): Promise<Veiculo> {
     return this.httpClient
       .put<Veiculo>(
-        `${this.URL}/${veiculo.idVeiculo}`,
+        `${this.URL}/${veiculo.id}`,
         JSON.stringify(veiculo),
         this.httpOptions
       )

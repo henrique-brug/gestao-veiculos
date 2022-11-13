@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { LandPageComponent } from '../land-page/land-page.component';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { VeiculoComponentService } from './veiculo-component.service';
 
 @Component({
   selector: 'app-form-cadastro-veiculo',
@@ -21,20 +22,21 @@ export class FormCadastroVeiculoComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private veiculoService: VeiculoStorageService
+    private veiculoComponentService: VeiculoComponentService,
+    private veiculoStorage: VeiculoStorageService
   ) {}
 
   ngOnInit(): void {
-    let idParam: number = +this.route.snapshot.paramMap.get('idVeiculo')!;
+    let idParam: number = +this.route.snapshot.paramMap.get('id')!;
     if (idParam != 0) {
-      let veiculos = this.veiculoService.getVeiculos().filter((v) => {
-        return v.idVeiculo === idParam;
+      let veiculos = this.veiculoStorage.getVeiculos().filter((v) => {
+        return v.id === idParam;
       });
       this.veiculo = veiculos[0];
       this.veiculoNovo = false;
       this.titulo = 'Editar veículo:';
     } else {
-      this.veiculo = new Veiculo('', '');
+      this.veiculo = new Veiculo(0, '', '');
     }
   }
 
@@ -43,29 +45,27 @@ export class FormCadastroVeiculoComponent implements OnInit {
   };
 
   onSubmit() {
-    if (this.veiculoService.isExist(this.veiculo.placa) && this.veiculoNovo) {
+    if (this.veiculoStorage.isExist(this.veiculo.placa) && this.veiculoNovo) {
       this.gerenciarMessage(
         `Ja existe um veículo cadastrado com esta placa: ${this.veiculo.placa}!`,
         false
       );
       return;
     }
-    if (this.veiculoNovo) {
-      this.veiculo.idVeiculo = this.veiculoService.getTotalVeiculos() + 1;
-      this.veiculoService.save(this.veiculo);
-      this.gerenciarMessage(
-        `Veículo  ${this.veiculo.modelo} cadastrado com sucesso!`
-      );
-    } else {
-      this.veiculoService.update(this.veiculo);
-      this.gerenciarMessage(
-        `Veículo  ${this.veiculo.modelo} alterado com sucesso!`
-      );
-    }
-    this.form.reset();
-    this.veiculo = new Veiculo('', '');
-    this.veiculoNovo = true;
-    this.titulo = 'Cadastrar veículo:';
+
+    this.veiculoComponentService
+      .do(this.veiculo, this.veiculoNovo)
+      .then((veiculo) => {
+        this.gerenciarMessage(`Veículo cadastrado com sucesso!`, true);
+        this.veiculoStorage.save(this.veiculo);
+        this.form.reset();
+        this.veiculo = new Veiculo(0, '', '');
+        this.veiculoNovo = true;
+        this.titulo = 'Cadastrar veículo:';
+      })
+      .catch((e) => {
+        this.gerenciarMessage(e, false);
+      });
   }
 
   gerenciarMessage(message: String, sucesso: Boolean = true) {

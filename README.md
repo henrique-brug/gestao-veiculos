@@ -28,7 +28,7 @@ https://www.figma.com/file/5UlIoB5BHFfsqvgzQfZnvq/Bootstrap-UI-Kit-(Gest%C3%A3o-
 - [x] Validar campos do formulário com REGEX e apresentar os erros.
 - [x] Desabilitar o botão de submit enquanto o formulário está inválido.
 - [] Fazer requisições a API com tratamento da resposta com Promises ou Observables.
-- [] Cadastrar uma entidade usando uma API (JSON Server ou Firebase).
+- [x] Cadastrar uma entidade usando uma API (JSON Server ou Firebase).
 - [x] Apresentar uma lista de dados com a diretiva estrutural ngFor.
 - [x] Usar a diretiva ngIf
 - [x] Formatar a apresentação de dados com Pipes.
