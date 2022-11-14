@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Conta } from '../model/conta';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VeiculoStorageService } from '../form-cadastro-veiculo/veiculo-storage.service';
+import { VeiculoComponentService } from '../form-cadastro-veiculo/veiculo-component.service';
 
 @Component({
   selector: 'app-land-page',
@@ -22,11 +23,12 @@ export class LandPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private veiculoService: VeiculoStorageService
+    private veiculoStorageService: VeiculoStorageService,
+    private veiculoComponentService: VeiculoComponentService
   ) {}
 
   ngOnInit(): void {
-    this.veiculos = this.veiculoService.getVeiculos();
+    this.veiculos = this.veiculoStorageService.getVeiculos();
     this.conta = LandPageComponent.conta;
   }
 
@@ -75,13 +77,21 @@ export class LandPageComponent implements OnInit {
     if (!confirmation) {
       return;
     }
-    let sucess: boolean = this.veiculoService.delete(id);
+
+    let sucess: boolean = this.veiculoStorageService.delete(id);
     if (sucess) {
-      this.mostrarMessage('O veículo foi removido com sucesso!');
+     /* this.veiculoComponentService
+        .delete(id)
+        .then((veiculo) => {
+          this.mostrarMessage('O veículo foi removido com sucesso!');
+        })
+        .catch((e) => {
+          this.mostrarMessage(e, false);
+        });*/
     } else {
       this.mostrarMessage('Opps! Não foi possível remover o veículo!', false);
     }
-    this.veiculos = this.veiculoService.getVeiculos();
+    this.veiculos = this.veiculoStorageService.getVeiculos();
   }
 
   ngOnDestroy(): void {

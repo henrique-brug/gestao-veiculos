@@ -7,8 +7,8 @@ import { DespesaComponent } from './despesa/despesa.component';
 const routes: Routes = [
   { path: '', component: LandPageComponent },
   { path: 'cadastro-veiculo', component: FormCadastroVeiculoComponent },
-  { path: 'editar-veiculo/:idVeiculo', component: FormCadastroVeiculoComponent },
-  { path: 'adicionar-despesa/:idVeiculo', component: DespesaComponent },
+  { path: 'editar-veiculo/:id', component: FormCadastroVeiculoComponent },
+  { path: 'adicionar-despesa/:id', component: DespesaComponent },
 ];
 
 @NgModule({

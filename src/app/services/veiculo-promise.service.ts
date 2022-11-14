@@ -15,6 +15,10 @@ export class VeiculoPromiseService {
 
   constructor(private httpClient: HttpClient) {}
 
+  getById(id: number): Promise<Veiculo[]> {
+    return this.httpClient.get<Veiculo[]>(`${this.URL}/${id}`).toPromise();
+  }
+
   getByPlaca(placa: string): Promise<Veiculo[]> {
     return this.httpClient
       .get<Veiculo[]>(`${this.URL}/placa/${placa}`)
@@ -48,6 +52,12 @@ export class VeiculoPromiseService {
         JSON.stringify(veiculo),
         this.httpOptions
       )
+      .toPromise();
+  }
+
+  delete(veiculo: Veiculo): Promise<Veiculo> {
+    return this.httpClient
+      .delete<Veiculo>(`${this.URL}/${veiculo.id}`, this.httpOptions)
       .toPromise();
   }
 }

@@ -16,7 +16,7 @@ export class FormCadastroVeiculoComponent implements OnInit {
   @ViewChild('form') form!: NgForm;
   veiculo!: Veiculo;
   veiculoNovo: Boolean = true;
-  titulo: String = 'Cadastrar veículo:';
+  titulo: String = 'Cadastrar';
   message: String = '';
   color = '';
 
@@ -34,7 +34,7 @@ export class FormCadastroVeiculoComponent implements OnInit {
       });
       this.veiculo = veiculos[0];
       this.veiculoNovo = false;
-      this.titulo = 'Editar veículo:';
+      this.titulo = 'Editar';
     } else {
       this.veiculo = new Veiculo(0, '', '');
     }
@@ -45,23 +45,19 @@ export class FormCadastroVeiculoComponent implements OnInit {
   };
 
   onSubmit() {
-    if (this.veiculoStorage.isExist(this.veiculo.placa) && this.veiculoNovo) {
-      this.gerenciarMessage(
-        `Ja existe um veículo cadastrado com esta placa: ${this.veiculo.placa}!`,
-        false
-      );
-      return;
-    }
-
     this.veiculoComponentService
       .do(this.veiculo, this.veiculoNovo)
       .then((veiculo) => {
         this.gerenciarMessage(`Veículo cadastrado com sucesso!`, true);
-        this.veiculoStorage.save(this.veiculo);
+        if (this.veiculoNovo) {
+          this.veiculoStorage.save(this.veiculo);
+        } else {
+          this.veiculoStorage.update(this.veiculo);
+        }
         this.form.reset();
         this.veiculo = new Veiculo(0, '', '');
         this.veiculoNovo = true;
-        this.titulo = 'Cadastrar veículo:';
+        this.titulo = 'Cadastrar';
       })
       .catch((e) => {
         this.gerenciarMessage(e, false);

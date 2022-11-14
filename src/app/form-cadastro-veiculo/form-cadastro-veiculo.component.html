@@ -7,7 +7,7 @@
   {{ this.message }}
 </div>
 
-<app-title title="Cadastrar veículo:"> </app-title>
+<app-title title="{{ this.titulo }} veículo:"></app-title>
 
 <form class="container" #form="ngForm" (submit)="onSubmit()">
   <div class="input-field col s6">
@@ -21,7 +21,7 @@
       #modelo="ngModel"
       required
     />
-    <label for="modelo" [ngClass]="{'active': true}">Modelo *</label>
+    <label for="modelo" [ngClass]="{ active: true }">Modelo *</label>
     <div class="red-text" [hidden]="modelo.valid || modelo.untouched">
       Por favor, informe o modelo.
     </div>
@@ -45,7 +45,7 @@
       #placa="ngModel"
       required
     />
-    <label for="placa" [ngClass]="{'active': true}">Placa *</label>
+    <label for="placa" [ngClass]="{ active: true }">Placa *</label>
     <div class="red-text" [hidden]="placa.valid || placa.untouched">
       Por favor, informe a placa.
     </div>
@@ -60,7 +60,7 @@
     type="submit"
     [disabled]="!form.valid"
   >
-    Cadastrar
+    {{ this.titulo }}
     <i class="material-icons right">save</i>
   </button>
 </form>
