@@ -37,7 +37,7 @@ export class VeiculoComponentService {
               resolve(values[0]!.id);
             })
             .catch((e) => {
-              reject('Opps!!! Não foi possível cadastrar o veículo!');
+              reject("Não foi possível realizar a operação! Error: " + e);
             });
         })
         .catch((e) => {
@@ -48,17 +48,27 @@ export class VeiculoComponentService {
     return p;
   }
 
-  /*delete(id: number): Promise<number> {
+  delete(id: number): Promise<number> {
     const p = new Promise<number>((resolve, reject) => {
       this.veiculoPromiseService
         .getById(id)
         .then((veiculos: Veiculo[]) => {
           let v;
-          if(veiculos.length > 0){
-            this.veiculoPromiseService.delete(veiculos[0]);
+          if (veiculos) {
+            v = this.veiculoPromiseService.delete(id);
           }
-          Promise.resolve(v)
-    }).catch((e) => {});
+          Promise.all([v])
+            .then((values) => {
+              resolve(values[0]!.id);
+            })
+            .catch((e) => {
+              reject('Opps!!! Não foi possível deletar o veículo!');
+            });
+        })
+        .catch((e) => {
+          reject('Veículo selecionado não foi encontrado!');
+        });
+    });
     return p;
-  }*/
+  }
 }

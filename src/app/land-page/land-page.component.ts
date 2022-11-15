@@ -53,6 +53,9 @@ export class LandPageComponent implements OnInit {
     } else {
       this.color = '#ff3f3f';
     }
+    this.currentStyles = {
+      background: this.color,
+    };
     setTimeout(() => {
       this.saldoMessage = '';
     }, 3000);
@@ -78,20 +81,16 @@ export class LandPageComponent implements OnInit {
       return;
     }
 
-    let sucess: boolean = this.veiculoStorageService.delete(id);
-    if (sucess) {
-     /* this.veiculoComponentService
-        .delete(id)
-        .then((veiculo) => {
-          this.mostrarMessage('O veículo foi removido com sucesso!');
-        })
-        .catch((e) => {
-          this.mostrarMessage(e, false);
-        });*/
-    } else {
-      this.mostrarMessage('Opps! Não foi possível remover o veículo!', false);
-    }
-    this.veiculos = this.veiculoStorageService.getVeiculos();
+    this.veiculoComponentService
+      .delete(id)
+      .then((veiculo) => {
+        this.veiculoStorageService.delete(id);
+        this.veiculos = this.veiculoStorageService.getVeiculos();
+        this.mostrarMessage('O veículo foi removido com sucesso!');
+      })
+      .catch((e) => {
+        this.mostrarMessage(e, false);
+      });
   }
 
   ngOnDestroy(): void {

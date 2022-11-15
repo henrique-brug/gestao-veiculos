@@ -55,9 +55,9 @@ export class VeiculoPromiseService {
       .toPromise();
   }
 
-  delete(veiculo: Veiculo): Promise<Veiculo> {
+  delete(id: number): Promise<Veiculo> {
     return this.httpClient
-      .delete<Veiculo>(`${this.URL}/${veiculo.id}`, this.httpOptions)
+      .delete<Veiculo>(`${this.URL}/${id}`, this.httpOptions)
       .toPromise();
   }
 }
