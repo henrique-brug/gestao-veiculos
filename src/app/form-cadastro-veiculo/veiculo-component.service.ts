@@ -1,18 +1,20 @@
-import { Veiculo } from '../model/veiculo';
+import { Veiculo } from './../model/veiculo';
 import { VeiculoPromiseService } from '../services/veiculo-promise.service';
-import { DebugEventListener, Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-import { WebStorageUtil } from '../util/web-storage-util';
-import { Constants } from '../util/constantes';
-import { PlatformLocation } from '@angular/common';
-import { VeiculoStorageService } from './veiculo-storage.service';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { RoutesAPI } from '../util/routes-api';
+import { ErrorUtil } from '../util/error-util';
 
 @Injectable({
   providedIn: 'root',
 })
 export class VeiculoComponentService {
-  constructor(private veiculoPromiseService: VeiculoPromiseService) {}
+  constructor(
+    private veiculoPromiseService: VeiculoPromiseService,
+    private httpClient: HttpClient
+  ) {}
 
   do(veiculo: Veiculo, novo: Boolean): Promise<number> {
     const p = new Promise<number>((resolve, reject) => {
@@ -37,7 +39,7 @@ export class VeiculoComponentService {
               resolve(values[0]!.id);
             })
             .catch((e) => {
-              reject("Não foi possível realizar a operação! Error: " + e);
+              reject('Não foi possível realizar a operação! Error: ' + e);
             });
         })
         .catch((e) => {
@@ -70,5 +72,11 @@ export class VeiculoComponentService {
         });
     });
     return p;
+  }
+
+  getAllVeiculos(): Observable<Veiculo[]> {
+    return this.httpClient
+      .get<Veiculo[]>(`${RoutesAPI.VEICULO}`)
+      .pipe(catchError(ErrorUtil.handleError));
   }
 }

@@ -30,6 +30,20 @@ export class LandPageComponent implements OnInit {
   ngOnInit(): void {
     this.veiculos = this.veiculoStorageService.getVeiculos();
     this.conta = LandPageComponent.conta;
+
+    this.veiculoComponentService.getAllVeiculos().subscribe(
+      (data) => {
+        this.veiculos = data;
+        this.veiculoStorageService.setVeiculos(data);
+      },
+      (error) => {
+        this.veiculos = this.veiculoStorageService.getVeiculos();
+        this.mostrarMessage(
+          'Não foi possível atualizar a lista de veículos! Sua lista pode estar desatualizada!',
+          false
+        );
+      }
+    );
   }
 
   expandirSoma() {
@@ -58,7 +72,7 @@ export class LandPageComponent implements OnInit {
     };
     setTimeout(() => {
       this.saldoMessage = '';
-    }, 3000);
+    }, 4000);
   }
 
   currentStyles = {
