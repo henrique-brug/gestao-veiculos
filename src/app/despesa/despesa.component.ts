@@ -1,3 +1,4 @@
+import { DespesaComponentService } from './despesaComponent.service';
 import { LandPageComponent } from './../land-page/land-page.component';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -15,11 +16,14 @@ import { VeiculoStorageService } from '../form-cadastro-veiculo/veiculo-storage.
 export class DespesaComponent implements OnInit {
   veiculo!: Veiculo;
   conta: Conta = LandPageComponent.conta;
-  despesa: Despesa = new Despesa(0, '', '');
+  despesa: Despesa = new Despesa(0, 0, '', '');
+  message: String = '';
+  color = '#2286d2';
 
   constructor(
     private route: ActivatedRoute,
-    private veiculoService: VeiculoStorageService
+    private veiculoService: VeiculoStorageService,
+    private despesaComponentService: DespesaComponentService
   ) {}
 
   ngOnInit(): void {
@@ -30,5 +34,36 @@ export class DespesaComponent implements OnInit {
     this.veiculo = veiculos[0];
   }
 
-  onSubmit(): void {}
+  onSubmit(): void {
+    this.despesaComponentService.do(this.veiculo.id, this.despesa).subscribe(
+      (data: Despesa) => {
+        this.mostrarMessage(
+          `Despesa adicionada com sucesso no valor de R$ ${data.valor}!`,
+          true
+        );
+      },
+      (error) => {
+        this.mostrarMessage(error.message, false);
+      }
+    );
+  }
+
+  mostrarMessage(message: String, sucess: Boolean = true): void {
+    this.message = message;
+    if (sucess) {
+      this.color = '#2286d2';
+    } else {
+      this.color = '#ff3f3f';
+    }
+    this.currentStyles = {
+      background: this.color,
+    };
+    setTimeout(() => {
+      this.message = '';
+    }, 3000);
+  }
+
+  currentStyles = {
+    background: this.color,
+  };
 }

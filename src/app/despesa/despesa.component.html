@@ -1,3 +1,12 @@
+<div
+  id="div-message"
+  class="card-panel white-text message"
+  [hidden]="!this.message"
+  [ngStyle]="currentStyles"
+>
+  {{ this.message }}
+</div>
+
 <app-title title="Adicionar despesas"> </app-title>
 <div style="width: 100%">
   <app-saldo #adicionarsaldo [saldoConta]="this.conta.saldo"></app-saldo>
@@ -21,7 +30,7 @@
     </div>
   </div>
 
-  <form class="container" (submit)="onSubmit()">
+  <form class="container" #form="ngForm" (submit)="onSubmit()">
     <div class="input-field col s6">
       <input
         id="valor"
@@ -60,6 +69,14 @@
       ></textarea>
       <label for="descricao">Descreva aqui os detalhes do valor gasto</label>
     </div>
+    <button
+      class="btn waves-effect waves-light button"
+      type="submit"
+      [disabled]="!form.valid"
+    >
+      Adicionar despesa
+      <i class="material-icons right">save</i>
+    </button>
   </form>
 </div>
 
@@ -67,9 +84,7 @@
   <div class="row">
     <div class="center-align">
       <i class="col s12 material-icons large">mood_bad</i>
-      <span class="col s12 flow-text"
-        >Ops, nenhum veículo encontrado!</span
-      >
+      <span class="col s12 flow-text">Ops, nenhum veículo encontrado!</span>
     </div>
   </div>
 </div>

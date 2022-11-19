@@ -9,3 +9,7 @@
   height: auto;
   margin: 20px 20px;
 }
+
+.button {
+  background-color: #ff4141 !important;
+}

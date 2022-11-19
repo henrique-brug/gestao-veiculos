@@ -1,9 +1,8 @@
 {
-  "veiculo": [
-    {
-      "id": 1,
-      "modelo": "Gol",
-      "placa": "DFW-4S85"
-    }
-  ]
+  "veiculo": [{
+    "id": 1,
+    "modelo": "Gol",
+    "placa": "DFW-4S85"
+  }],
+  "despesa": []
 }

@@ -79,4 +79,15 @@ export class VeiculoComponentService {
       .get<Veiculo[]>(`${RoutesAPI.VEICULO}`)
       .pipe(catchError(ErrorUtil.handleError));
   }
+
+  /*Método ja existe em veiculo-promisse, mas foi recriado aqui para
+  um exemplo de retorno em observable*/
+  getById(id: number): Observable<Veiculo[]> {
+    const query: HttpParams = new HttpParams().set('id', id);
+    const options = id ? { params: query } : {};
+
+    return this.httpClient
+      .get<Veiculo[]>(`${RoutesAPI.VEICULO}`, options)
+      .pipe(catchError(ErrorUtil.handleError));
+  }
 }
