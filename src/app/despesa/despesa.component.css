@@ -13,3 +13,12 @@
 .button {
   background-color: #ff4141 !important;
 }
+
+.button:disabled {
+  background-color: #fffb00 !important;
+}
+
+.button-cancel {
+  margin-right: 1%;
+  background-color: #b6b6b6 !important;
+}

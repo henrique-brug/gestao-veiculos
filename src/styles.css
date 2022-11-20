@@ -6,3 +6,11 @@
   width: 50%;
   margin-left: 10%;
 }
+
+@media(max-width: 500px) {
+
+  input,
+  textarea {
+    width: 70% !important;
+  }
+}

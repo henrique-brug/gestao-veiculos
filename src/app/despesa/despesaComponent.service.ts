@@ -4,7 +4,7 @@ import { VeiculoComponentService } from '../form-cadastro-veiculo/veiculo-compon
 import { Despesa } from '../model/despesa';
 import { Veiculo } from '../model/veiculo';
 import { DespesaService } from './despesa.service';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 
 import { catchError, concatMap, map, tap } from 'rxjs/operators';
 import { ErrorUtil } from '../util/error-util';
@@ -25,6 +25,11 @@ export class DespesaComponentService {
   ) {}
 
   do(veiculoId: number, despesa: Despesa): Observable<Despesa> {
+    if (despesa.nomeDespesa.length < 4) {
+      return throwError(
+        new Error('O nome da despesa deve possuir 4 caracteres ou mais!')
+      );
+    }
     let result$ = this.veiculoComponentService.getById(veiculoId).pipe(
       map((veiculos) => veiculos[0]),
       tap((veiculo) => {

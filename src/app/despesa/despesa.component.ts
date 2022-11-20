@@ -1,11 +1,12 @@
 import { DespesaComponentService } from './despesaComponent.service';
 import { LandPageComponent } from './../land-page/land-page.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Veiculo } from '../model/veiculo';
 import { Conta } from '../model/conta';
 import { Despesa } from '../model/despesa';
 import { VeiculoStorageService } from '../form-cadastro-veiculo/veiculo-storage.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-despesa',
@@ -14,6 +15,7 @@ import { VeiculoStorageService } from '../form-cadastro-veiculo/veiculo-storage.
   providers: [VeiculoStorageService],
 })
 export class DespesaComponent implements OnInit {
+  @ViewChild('form') form!: NgForm;
   veiculo!: Veiculo;
   conta: Conta = LandPageComponent.conta;
   despesa: Despesa = new Despesa(0, 0, '', '');
@@ -35,17 +37,26 @@ export class DespesaComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.despesaComponentService.do(this.veiculo.id, this.despesa).subscribe(
-      (data: Despesa) => {
-        this.mostrarMessage(
-          `Despesa adicionada com sucesso no valor de R$ ${data.valor}!`,
-          true
-        );
-      },
-      (error) => {
-        this.mostrarMessage(error.message, false);
-      }
-    );
+    if (this.despesa.valor > 0) {
+      this.despesaComponentService.do(this.veiculo.id, this.despesa).subscribe(
+        (data: Despesa) => {
+          this.mostrarMessage(
+            `Despesa adicionada com sucesso no valor de R$ ${data.valor}!`,
+            true
+          );
+          this.form.reset();
+          this.despesa = new Despesa(0, 0, '', '');
+        },
+        (error) => {
+          this.mostrarMessage(error.message, false);
+        }
+      );
+    } else {
+      this.mostrarMessage(
+        'Você deve informar um valor maior que 0 para despesa!',
+        false
+      );
+    }
   }
 
   mostrarMessage(message: String, sucess: Boolean = true): void {

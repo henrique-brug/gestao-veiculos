@@ -1,3 +1,8 @@
+<app-title title="Adicionar despesas"> </app-title>
+<div style="width: 100%">
+  <app-saldo #adicionarsaldo [saldoConta]="this.conta.saldo"></app-saldo>
+</div>
+
 <div
   id="div-message"
   class="card-panel white-text message"
@@ -5,11 +10,6 @@
   [ngStyle]="currentStyles"
 >
   {{ this.message }}
-</div>
-
-<app-title title="Adicionar despesas"> </app-title>
-<div style="width: 100%">
-  <app-saldo #adicionarsaldo [saldoConta]="this.conta.saldo"></app-saldo>
 </div>
 
 <div *ngIf="veiculo">
@@ -44,6 +44,8 @@
         prefix="R$ "
         [dropSpecialCharacters]="true"
         [showMaskTyped]="false"
+        #valor="ngModel"
+        required
       />
       <label for="valor">Valor gasto</label>
     </div>
@@ -52,11 +54,16 @@
       <textarea
         id="nomeDespesa"
         name="nomeDespesa"
-        class="materialize-textarea"
+        class="materialize-textarea validate"
         data-length="50"
         [(ngModel)]="this.despesa.nomeDespesa"
+        #nomeDespesa="ngModel"
+        required
       ></textarea>
       <label for="nomeDespesa">Identifique esta despesa com um nome</label>
+      <div class="red-text" *ngIf="nomeDespesa.errors && nomeDespesa.touched">
+        Por favor, informe um nome para essa despesa!
+      </div>
     </div>
 
     <div class="input-field col s12">
@@ -69,6 +76,15 @@
       ></textarea>
       <label for="descricao">Descreva aqui os detalhes do valor gasto</label>
     </div>
+
+    <button
+      class="btn waves-effect waves-light button-cancel"
+      type="button"
+      routerLink=""
+    >
+      Cancelar
+      <i class="material-icons right">cancel</i>
+    </button>
     <button
       class="btn waves-effect waves-light button"
       type="submit"
