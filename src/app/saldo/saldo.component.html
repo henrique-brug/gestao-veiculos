@@ -3,7 +3,11 @@
   <div
     class="col s12 m6 offset-m3 card-panel white-text modal-saldo"
     id="div-panel"
+    [ngStyle]="currentStyles"
   >
     {{ this.saldoConta | currency: "BRL" }}
   </div>
+</div>
+<div class="red-text negativo" *ngIf="this.saldoConta < 0" style="display: block;">
+  ATENÇÃO, SEU SALDO ESTÁ NEGATIVO!
 </div>

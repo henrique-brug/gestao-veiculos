@@ -1,3 +1,5 @@
+import { Constants } from './../util/constantes';
+import { ContaService } from './../saldo/conta.service';
 import { Veiculo } from './../model/veiculo';
 import { Component, OnInit } from '@angular/core';
 import { Conta } from '../model/conta';
@@ -12,8 +14,7 @@ import { VeiculoComponentService } from '../form-cadastro-veiculo/veiculo-compon
   providers: [VeiculoStorageService],
 })
 export class LandPageComponent implements OnInit {
-  public static conta = new Conta();
-  conta: Conta = new Conta();
+  conta: Conta = new Conta(0, 0);
   veiculos?: Veiculo[];
   saldoMessage: String = '';
   valorSoma: number = 0;
@@ -24,12 +25,13 @@ export class LandPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private veiculoStorageService: VeiculoStorageService,
-    private veiculoComponentService: VeiculoComponentService
+    private veiculoComponentService: VeiculoComponentService,
+    private contaService: ContaService
   ) {}
 
   ngOnInit(): void {
     this.veiculos = this.veiculoStorageService.getVeiculos();
-    this.conta = LandPageComponent.conta;
+    this.getConta();
 
     this.veiculoComponentService.getAllVeiculos().subscribe(
       (data) => {
@@ -46,14 +48,33 @@ export class LandPageComponent implements OnInit {
     );
   }
 
+  getConta(): void {
+    this.contaService.getById(Constants.CONTA_KEY).subscribe(
+      (data) => {
+        this.conta = data[0];
+      },
+      (error) => {
+        this.mostrarMessage('Não foi possível recuperar a conta!', false);
+      }
+    );
+  }
+
   expandirSoma() {
     this.mostrarSoma = true;
   }
 
   realizarSoma() {
     this.conta.saldo += this.valorSoma;
-    this.mostrarSoma = false;
-    this.valorSoma = 0;
+    this.contaService.patch(this.conta).subscribe(
+      (data: Conta) => {
+        this.mostrarSoma = false;
+        this.valorSoma = 0;
+      },
+      (error) => {
+        this.veiculos = this.veiculoStorageService.getVeiculos();
+        this.mostrarMessage('Não foi possível recuperar a conta!', false);
+      }
+    );
   }
 
   messageSaldoEvent(event: String) {
@@ -105,9 +126,5 @@ export class LandPageComponent implements OnInit {
       .catch((e) => {
         this.mostrarMessage(e, false);
       });
-  }
-
-  ngOnDestroy(): void {
-    LandPageComponent.conta = this.conta;
   }
 }

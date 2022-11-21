@@ -1,5 +1,6 @@
 export class Conta {
-  saldo: number = 0;
-
-  constructor() {}
+  constructor(public id: number = 0, public saldo: number) {
+    this.id = Math.round(Math.random() * 1000);
+    this.saldo = saldo;
+  }
 }

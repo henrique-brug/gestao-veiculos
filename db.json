@@ -9,10 +9,16 @@
   "despesa": [
     {
       "id": 1,
-      "valor": 1.500,
+      "valor": 1.5,
       "nomeDespesa": "Troca de pneus",
       "descricao": "Foi realizado a troca de todos os 4 pneus (todos são novos)",
       "veiculoId": 1
+    }
+  ],
+  "conta": [
+    {
+      "id": 1,
+      "saldo": -18
     }
   ]
 }

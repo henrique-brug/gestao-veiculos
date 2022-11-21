@@ -1,3 +1,4 @@
+import { ContaService } from './../saldo/conta.service';
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { VeiculoComponentService } from '../form-cadastro-veiculo/veiculo-component.service';
@@ -8,6 +9,7 @@ import { Observable, throwError } from 'rxjs';
 
 import { catchError, concatMap, map, tap } from 'rxjs/operators';
 import { ErrorUtil } from '../util/error-util';
+import { Conta } from '../model/conta';
 
 @Injectable({
   providedIn: 'root',
@@ -21,10 +23,11 @@ export class DespesaComponentService {
 
   constructor(
     private veiculoComponentService: VeiculoComponentService,
-    private despesaService: DespesaService
+    private despesaService: DespesaService,
+    private contaService: ContaService
   ) {}
 
-  do(veiculoId: number, despesa: Despesa): Observable<Despesa> {
+  do(veiculoId: number, despesa: Despesa, conta: Conta): Observable<Despesa> {
     if (despesa.nomeDespesa.length < 4) {
       return throwError(
         new Error('O nome da despesa deve possuir 4 caracteres ou mais!')
@@ -37,7 +40,14 @@ export class DespesaComponentService {
       }),
       concatMap((veiculo: Veiculo) => {
         despesa.veiculoId = veiculo.id;
-        return this.despesaService.save(despesa);
+        conta.saldo = conta.saldo - despesa.valor;
+
+        const result$ = this.contaService.patch(conta).pipe(
+          concatMap(() => {
+            return this.despesaService.save(despesa);
+          })
+        );
+        return result$;
       }),
       catchError(ErrorUtil.handleError)
     );
