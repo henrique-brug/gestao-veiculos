@@ -1,8 +1,10 @@
+import { Despesa } from './../model/despesa';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Despesa } from '../model/despesa';
 import { RoutesAPI } from '../util/routes-api';
 import { Observable } from 'rxjs';
+import { ErrorUtil } from '../util/error-util';
 
 @Injectable({
   providedIn: 'root',
@@ -22,5 +24,11 @@ export class DespesaService {
       transaction,
       this.httpOptions
     );
+  }
+
+  getByVeiculo(veiculoId: number): Observable<Despesa[]> {
+    return this.httpClient
+      .get<Despesa[]>(`${this.URL}/veiculoId/${veiculoId}`)
+      .pipe(catchError(ErrorUtil.handleError));
   }
 }

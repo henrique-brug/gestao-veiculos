@@ -1,4 +1,5 @@
 {
   "/veiculo/placa/:p": "/veiculo?placa=:p",
-  "/veiculo": "/veiculo"
+  "/veiculo": "/veiculo",
+  "/despesa/veiculoId/:v": "/despesa?veiculoId=:v"
 }

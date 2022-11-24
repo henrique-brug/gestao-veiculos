@@ -1,3 +1,4 @@
+import { DespesaService } from './despesa.service';
 import { DespesaComponentService } from './despesaComponent.service';
 import { LandPageComponent } from './../land-page/land-page.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -19,6 +20,7 @@ import { Constants } from '../util/constantes';
 export class DespesaComponent implements OnInit {
   @ViewChild('form') form!: NgForm;
   veiculo!: Veiculo;
+  despesas!: Despesa[];
   conta: Conta = new Conta(0, 0);
   despesa: Despesa = new Despesa(0, 0, '', '');
   message: String = '';
@@ -28,6 +30,7 @@ export class DespesaComponent implements OnInit {
     private route: ActivatedRoute,
     private veiculoService: VeiculoStorageService,
     private despesaComponentService: DespesaComponentService,
+    private despesaService: DespesaService,
     private contaService: ContaService
   ) {}
 
@@ -38,23 +41,26 @@ export class DespesaComponent implements OnInit {
       return v.id === idParam;
     });
     this.veiculo = veiculos[0];
+    this.getDespesas();
   }
 
   onSubmit(): void {
     if (this.despesa.valor > 0) {
-      this.despesaComponentService.do(this.veiculo.id, this.despesa, this.conta).subscribe(
-        (data: Despesa) => {
-          this.mostrarMessage(
-            `Despesa adicionada com sucesso no valor de R$ ${data.valor}!`,
-            true
-          );
-          this.form.reset();
-          this.despesa = new Despesa(0, 0, '', '');
-        },
-        (error) => {
-          this.mostrarMessage(error.message, false);
-        }
-      );
+      this.despesaComponentService
+        .do(this.veiculo.id, this.despesa, this.conta)
+        .subscribe(
+          (data: Despesa) => {
+            this.mostrarMessage(
+              `Despesa adicionada com sucesso no valor de R$ ${data.valor}!`,
+              true
+            );
+            this.form.reset();
+            this.despesa = new Despesa(0, 0, '', '');
+          },
+          (error) => {
+            this.mostrarMessage(error.message, false);
+          }
+        );
     } else {
       this.mostrarMessage(
         'Você deve informar um valor maior que 0 para despesa!',
@@ -92,4 +98,15 @@ export class DespesaComponent implements OnInit {
   currentStyles = {
     background: this.color,
   };
+
+  getDespesas() {
+    this.despesaService.getByVeiculo(this.veiculo.id).subscribe(
+      (data: Despesa[]) => {
+        this.despesas = data;
+      },
+      (error) => {
+        //  this.mostrarMessage('Não foi possível recuperar a conta!', false);
+      }
+    );
+  }
 }
