@@ -56,6 +56,7 @@ export class DespesaComponent implements OnInit {
             );
             this.form.reset();
             this.despesa = new Despesa(0, 0, '', '');
+            this.getDespesas();
           },
           (error) => {
             this.mostrarMessage(error.message, false);
@@ -105,7 +106,7 @@ export class DespesaComponent implements OnInit {
         this.despesas = data;
       },
       (error) => {
-        //  this.mostrarMessage('Não foi possível recuperar a conta!', false);
+        this.mostrarMessage('Não foi buscar as despesas!', false);
       }
     );
   }

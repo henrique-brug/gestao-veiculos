@@ -120,6 +120,7 @@
       <tbody>
         <tr *ngFor="let d of this.despesas">
           <td>{{ d.id }}</td>
+          <td>{{ d.data | date: "dd/MM/yyyy hh:mm " }}</td>
           <td>{{ d.nomeDespesa }}</td>
           <td>{{ d.valor | currency: "BRL" }}</td>
         </tr>
