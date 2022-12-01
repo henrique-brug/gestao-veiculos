@@ -1,0 +1,25 @@
+{
+  "veiculo": [
+    {
+      "id": 1,
+      "modelo": "Gol",
+      "placa": "DFW-4S85"
+    }
+  ],
+  "despesa": [
+    {
+      "id": 1,
+      "valor": 1500.5,
+      "nomeDespesa": "Troca de pneus",
+      "descricao": "Foi realizado a troca de todos os 4 pneus (todos são novos)",
+      "data": "2022-11-26T02:06:11.153Z",
+      "veiculoId": 1
+    }
+  ],
+  "conta": [
+    {
+      "id": 1,
+      "saldo": 0
+    }
+  ]
+}

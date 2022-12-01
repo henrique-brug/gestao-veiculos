@@ -1,0 +1,24 @@
+.title {
+  font-weight: bold;
+  font-family: cursive;
+  padding-top: 14px;
+}
+
+.container {
+  width: 500px;
+  height: auto;
+  margin: 20px 20px;
+}
+
+.button {
+  background-color: #ff4141 !important;
+}
+
+.button:disabled {
+  background-color: #fffb00 !important;
+}
+
+.button-cancel {
+  margin-right: 1%;
+  background-color: #b6b6b6 !important;
+}

@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~materialize-css/dist/css/materialize.css";
+@import "~material-icons/iconfont/material-icons.css";
+
+.message {
+  width: 50%;
+  margin-left: 10%;
+}
+
+@media(max-width: 500px) {
+
+  input,
+  textarea {
+    width: 70% !important;
+  }
+}

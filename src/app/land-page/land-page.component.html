@@ -1,0 +1,108 @@
+<div
+  id="div-message"
+  class="card-panel white-text message"
+  [hidden]="!this.saldoMessage"
+  [ngStyle]="currentStyles"
+>
+  {{ this.saldoMessage }}
+</div>
+
+<div style="width: 100%">
+  <app-saldo
+    #adicionarsaldo
+    [saldoConta]="this.conta.saldo"
+    (messageSaldoEvent)="this.messageSaldoEvent($event)"
+  ></app-saldo>
+</div>
+
+<div class="adicionar-saldo">
+  <div style="display: flex">
+    <button
+      class="btn waves-effect waves-light button-adicionar-saldo"
+      type="button"
+      name="action"
+      (click)="expandirSoma()"
+    >
+      Adicionar saldo
+      <i class="material-icons right">keyboard_arrow_right</i>
+    </button>
+  </div>
+
+  <div [hidden]="!this.mostrarSoma">
+    <div class="input-saldo">
+      <div class="input-field col s6">
+        <input
+          id="adicionar-saldo"
+          name="adicionar-saldo"
+          type="text"
+          class="validate money adicionar-saldo label"
+          [(ngModel)]="this.valorSoma"
+          mask="separator.2"
+          [thousandSeparator]="'.'"
+          [decimalMarker]="','"
+          prefix="R$ "
+          [dropSpecialCharacters]="true"
+          [showMaskTyped]="false"
+        />
+        <label for="adicionar-saldo"></label>
+      </div>
+      <button
+        class="btn waves-effect waves-light button-soma"
+        type="button"
+        name="action"
+        (click)="realizarSoma()"
+      >
+        <i class="material-icons left">add</i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-title title="Veículos:"> </app-title>
+<div class="row">
+  <div class="col s12 m6 offset-m1">
+    <table>
+      <thead>
+        <tr>
+          <th data-field="td-date">Código</th>
+          <th data-field="td-date">Modelo</th>
+          <th data-field="td-type">Placa</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let v of this.veiculos">
+          <td>{{ v.id }}</td>
+          <td>{{ v.modelo }}</td>
+          <td>{{ v.placa | uppercase }}</td>
+          <td class="right">
+            <a>
+              <img
+                title="Adicionar despesa"
+                class="img-despesa icon"
+                src="./assets/resources/images/despesa-icon.png"
+                (click)="adicionarDespesa(v)"
+              />
+            </a>
+            <a
+              ><i
+                title="Editar"
+                class="material-icons orange-text icon"
+                (click)="editarVeiculo(v)"
+                >edit</i
+              ></a
+            >
+            <a
+              ><i
+                title="Excluir"
+                class="material-icons my-icon-size red-text icon"
+                (click)="onDelete(v.id)"
+                >delete</i
+              ></a
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

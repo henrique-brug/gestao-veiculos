@@ -1,0 +1,40 @@
+.my-logo {
+  height: 64px;
+  margin-top: -12px;
+}
+
+.header {
+  background: #2A8787;
+}
+
+.app-name {
+  margin: 20px 10px 15px 100px;
+  font-size: 26px;
+  font-family: Roboto;
+  font-weight: bold;
+  color: #fff;
+}
+
+.app-name.mobile {
+  width: 100%;
+  margin: 20px 10px 15px 0px;
+  font-size: 26px;
+}
+
+.container.header {
+  width: 100%;
+}
+
+.itens {
+  font-family: Roboto;
+  font-weight: bold;
+  color: #fff;
+  font-size: 18px;
+  margin: 0 0 0 60px;
+}
+
+.itens.mobile {
+  width: 100%;
+  font-weight: normal;
+  margin: 0 0 0 20px;
+}
