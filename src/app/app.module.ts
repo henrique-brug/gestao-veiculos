@@ -13,6 +13,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { LandPageComponent } from './land-page/land-page.component';
 import { SaldoComponent } from './saldo/saldo.component';
 import { DespesaComponent } from './despesa/despesa.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { DespesaComponent } from './despesa/despesa.component';
     FormCadastroVeiculoComponent,
     LandPageComponent,
     SaldoComponent,
-    DespesaComponent
+    DespesaComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
